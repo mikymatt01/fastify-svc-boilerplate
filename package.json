@@ -15,6 +15,7 @@
     "commit": "npx git-cz",
     "prepare": "husky install",
     "test": "jest -i",
+    "bruno:import": "bru import openapi --source ./src/docs/openapi.json --output ./bruno --collection-name \"boilerplate API\"",
     "plugin:generate": "node wezard-scripts/plugin-generator/index.js",
     "schema:generate": "node wezard-scripts/schema-generator/index.js",
     "prisma:generate": "prisma generate",
