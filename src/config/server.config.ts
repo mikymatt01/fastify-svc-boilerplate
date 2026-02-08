@@ -18,6 +18,7 @@ export type Config = {
     google: {
         googleProjectId?: string
         googleStorageBucket?: string
+        firebaseApiKey: string
     }
     firebase: {
         projectId?: string
@@ -91,7 +92,8 @@ const config: Config = {
     },
     google: {
         googleProjectId: envVars.GOOGLE_PROJECT_ID,
-        googleStorageBucket: envVars.GOOGLE_STORAGE_BUCKET
+        googleStorageBucket: envVars.GOOGLE_STORAGE_BUCKET,
+        firebaseApiKey: envVars.FIREBASE_API_KEY
     },
     firebase: {
         projectId: envVars.FIREBASE_PROJECT_ID,

@@ -1,12 +1,13 @@
 import { type FastifyPluginCallback } from 'fastify'
 import authController from './auth.controller'
-import _schema from '../../../_schema'
+import { RegisterBodySchema } from './auth.validation'
 import { authToken } from '../../hooks/authentication'
+import { generateSchemaValidation } from '../response.validation'
 
 const authRoutes: FastifyPluginCallback = (fastify, _opts, done) => {
     fastify.post(
         '/register',
-        { preHandler: [authToken], schema: { body: _schema.RegisterBody } },
+        { preHandler: [authToken], schema: { body: generateSchemaValidation(RegisterBodySchema) } },
         authController.register
     )
     done()
