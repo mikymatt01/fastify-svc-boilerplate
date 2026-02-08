@@ -15,6 +15,7 @@ export type Config = {
     fullResponse: boolean
     databaseUrl: string
     serverUrl: string
+    adminApiKey: string
     google: {
         googleProjectId?: string
         googleStorageBucket?: string
@@ -87,6 +88,7 @@ const config: Config = {
     fullResponse: envVars.FULL_RESPONSE,
     databaseUrl: envVars.DATABASE_URL,
     serverUrl: envVars.SERVER_URL,
+    adminApiKey: envVars.ADMIN_API_KEY,
     email: {
         defaultSender: envVars.EMAIL_DEFAULT_SENDER
     },

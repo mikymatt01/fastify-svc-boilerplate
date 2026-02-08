@@ -5,6 +5,8 @@ import logger from './src/utils/logger'
 import getServer from './src/server'
 import WezardError from './src/utils/WezardError'
 import db from './src/utils/db'
+import fs from 'fs'
+import path from 'path'
 
 const main = async () => {
     try {
@@ -30,6 +32,13 @@ const main = async () => {
                 }
             ]
         })
+
+        await server.ready()
+        const spec = server.swagger()
+
+        const dirname = __dirname
+        const openapiPath = path.join(dirname, 'src', 'docs', 'openapi.json')
+        fs.writeFileSync(openapiPath, JSON.stringify(spec, null, 2))
 
         await server.listen({ port: config.port, host: '0.0.0.0' })
 
