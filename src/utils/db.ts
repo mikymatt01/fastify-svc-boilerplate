@@ -5,16 +5,28 @@ const globalForPrisma = globalThis as unknown as {
     prisma: PrismaClient | undefined
 }
 
-let prisma: PrismaClient
+let prisma: PrismaClient | undefined
 
-if (config.env === 'production') {
-    prisma = new PrismaClient()
-} else {
-    if (globalForPrisma.prisma === undefined || globalForPrisma.prisma === null) {
+function getPrisma(): PrismaClient {
+    if (config.env === 'production') {
+        prisma ??= new PrismaClient()
+        return prisma
+    }
+
+    if (globalForPrisma.prisma == null) {
         globalForPrisma.prisma = new PrismaClient()
     }
 
-    prisma = globalForPrisma.prisma
+    return globalForPrisma.prisma
 }
 
-export default prisma
+const db = new Proxy(
+    {},
+    {
+        get(_target, prop) {
+            return (getPrisma() as never)[prop as never]
+        }
+    }
+) as PrismaClient
+
+export default db

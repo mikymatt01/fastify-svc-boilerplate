@@ -22,7 +22,7 @@
         }
       }
     },
-    "/1/auth/register": {
+    "/1.0.0/auth/register": {
       "post": {
         "summary": "Register a new user",
         "tags": [
@@ -94,7 +94,7 @@
         }
       }
     },
-    "/1/users/{userId}": {
+    "/1.0.0/users/{userId}": {
       "get": {
         "summary": "Get user by ID",
         "tags": [
@@ -117,7 +117,7 @@
         }
       }
     },
-    "/1/health": {
+    "/1.0.0/health": {
       "get": {
         "summary": "Get service health status",
         "tags": [
