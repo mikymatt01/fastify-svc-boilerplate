@@ -5,13 +5,11 @@ import logger from './logger'
 let supabaseClient: SupabaseClient | null = null
 let supabaseAdminClient: SupabaseClient | null = null
 
-// Initialize Supabase client using environment variables from config
 const initializeSupabase = () => {
     try {
         const supabaseUrl = config.supabase.supabaseUrl
         const supabaseAnonKey = config.supabase.supabaseAnonKey
         if (supabaseUrl && supabaseAnonKey) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
             supabaseClient = createClient(supabaseUrl, supabaseAnonKey)
             logger.info('Supabase client initialized successfully')
         } else {
@@ -22,7 +20,6 @@ const initializeSupabase = () => {
 
         const supabaseServiceRoleKey = config.supabase.supabaseServiceRoleKey
         if (supabaseUrl && supabaseServiceRoleKey) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
             supabaseAdminClient = createClient(supabaseUrl, supabaseServiceRoleKey, {
                 auth: {
                     autoRefreshToken: false,
