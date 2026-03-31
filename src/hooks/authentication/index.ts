@@ -3,10 +3,10 @@ import { APIErrors } from '../../utils/consts'
 import WezardError from '../../utils/WezardError'
 import config from '../../config/server.config'
 
-import verifyFirebaseToken from './firebase-auth'
+import verifySupabaseToken from './supabase-auth'
 
 // CHANGE IT FOR NEW IMPLEMENTATION
-const authTokenVerify: (token: string) => Promise<TokenDecoded> = verifyFirebaseToken
+const authTokenVerify: (token: string) => Promise<TokenDecoded> = verifySupabaseToken
 
 export const authToken = async (req: FastifyRequest<{ Body: never; Params: never; Querystring: never }>) => {
     if (!req.headers.authorization || !req.headers.authorization.split(' ')[1]) {
@@ -20,7 +20,7 @@ export const authToken = async (req: FastifyRequest<{ Body: never; Params: never
         if (!userPayload) throw WezardError.fromDef(APIErrors.InvalidToken)
 
         req.user = userPayload
-    } catch (_error) {
+    } catch {
         throw WezardError.fromDef(APIErrors.InvalidToken)
     }
 }
